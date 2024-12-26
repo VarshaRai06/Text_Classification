@@ -1,0 +1,7 @@
+text,label
+"I love this movie, it was fantastic!",positive
+"This is a terrible product, I want a refund.",negative
+"I had the best experience with this service.",positive
+"The food was awful, I wouldn't recommend it.",negative
+"Absolutely loved the performance!",positive
+"The service was horrible and the staff was rude.",negative
