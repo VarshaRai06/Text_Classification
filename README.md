@@ -1,16 +1,20 @@
-# SVM Text Classification API
+# Text Classification API using SVM
 
-This repository contains a simple FastAPI-based API for performing text classification using a pre-trained Support Vector Machine (SVM) model.
+This repository provides a **FastAPI-based API** for text classification, powered by a pre-trained **Support Vector Machine (SVM)** model.
 
-## Features
+---
 
-- **Text Classification:** Classify text into predefined categories.
-- **Prediction Probability:**  Provides the probability of the predicted class.
-- **Performance Monitoring:** Monitors the time taken for each prediction.
+## Key Features
 
-## Project Structure
+- **Text Classification**: Classify input text into pre-defined categories.
+- **Prediction Confidence**: Return the probability associated with the predicted category.
+- **Performance Tracking**: Logs and tracks the time taken to perform each prediction.
 
-```
+---
+
+## Project Directory Layout
+
+```plaintext
 ├── app
 │   ├── routes.py
 │   └── main.py
@@ -23,98 +27,123 @@ This repository contains a simple FastAPI-based API for performing text classifi
 ├── .gitignore
 ├── dataset.xlsx
 ├── requirements.txt
-
-
 ```
 
-- **app/main.py:**  Main FastAPI application file.
-- **app/routes.py:**  Defines the API routes and handles requests.
-- **model/predict.py:** Contains the `ModelPredictor` class for loading the model and making predictions.
-- **model/train.py:**  Provides a function to train the SVM model and save it.
-- **model/monitor.py:**  Includes a decorator to monitor prediction time.
-- **requirements.txt:** Lists the project dependencies.
-- **.gitignore:** Specifies files and folders to be ignored by Git.
-- **svm_model.pkl:**  The trained SVM model file. (Not included in the repository, generate it using `train.py`)
-- **dataset.xlsx:** The Excel file containing the training data with 'text' and 'label' columns.
-- **venv:** The virtual environment directory containing Python packages.
-- **README.md:** The main documentation file explaining the project, its structure, installation, and usage.
+---
 
+## Description of Files and Folders
 
-## Installation
+- **`app/main.py`**: The entry point for the FastAPI application.
+- **`app/routes.py`**: Defines the API endpoints and handles incoming requests.
+- **`model/predict.py`**: Houses the `ModelPredictor` class, responsible for loading the trained model and making predictions.
+- **`model/train.py`**: Contains logic for training the SVM model and saving it as a file.
+- **`model/monitor.py`**: A module with a decorator that tracks and logs prediction times.
+- **`requirements.txt`**: A file that lists all the required dependencies for the project.
+- **`.gitignore`**: Specifies which files and directories to exclude from version control.
+- **`svm_model.pkl`**: The SVM model file, generated after training (not included; use `train.py` to create it).
+- **`dataset.xlsx`**: The dataset file (Excel format) containing the "text" and "label" columns, used for training.
+- **`venv`**: The virtual environment folder that contains the Python packages.
+- **`README.md`**: Documentation outlining the project, including setup instructions and usage.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/svm-text-classification-api.git 
-   ```
+---
 
-2. **Navigate to the project directory:**
-   ```bash
-   cd svm-text-classification-api
-   ```
+## Setup Instructions
 
-3. **Create a virtual environment (recommended):**
-   ```bash
-   python -m venv venv
-   ```
+Follow these steps to get the project up and running:
 
-4. **Activate the virtual environment:**
-   - On Windows:
-     ```bash
-     venv\Scripts\activate
-     ```
-   - On macOS and Linux:
-     ```bash
-     source venv/bin/activate
-     ```
+### Clone the Repository:
+```bash
+git clone https://github.com/your-username/svm-text-classification-api.git
+```
 
-5. **Install the dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Navigate to the Project Folder:
+```bash
+cd svm-text-classification-api
+```
 
-## Training the Model
+### Set up a Virtual Environment (Optional but Recommended):
+```bash
+python -m venv venv
+```
 
-1. **Prepare your dataset:** You need a dataset in Excel format (.xlsx) with two columns: "text" and "label".
-2. **Update the `train.py` script:** Modify the `data_path` variable in `train.py` to point to your dataset.
-3. **Run the training script:**
+### Activate the Virtual Environment:
+
+- **For Windows:**
+  ```bash
+  venv\Scripts\activate
+  ```
+- **For macOS/Linux:**
+  ```bash
+  source venv/bin/activate
+  ```
+
+### Install the Required Dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Model Training
+
+### To Train the SVM Model:
+
+1. **Prepare Your Dataset**:
+   Ensure your dataset is in Excel (`.xlsx`) format, with `text` and `label` columns.
+
+2. **Modify `train.py`**:
+   Update the `data_path` variable in `train.py` to point to your dataset.
+
+3. **Run the Training Script**:
    ```bash
    python model/train.py
    ```
-   This will train the SVM model and save it as `svm_model.pkl`.
+   This will train the model and save it as `svm_model.pkl`.
 
-## Running the API
+---
 
-1. **Start the FastAPI server:**
-   ```bash
-   uvicorn app.main:app --reload
-   ```
+## Running the API Server
+
+To start the API server, run:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+The server will be live, and you can now send requests to it.
+
+---
 
 ## Making Predictions
 
-- **Send a POST request to `/predict/` with the following JSON payload:**
+To make a prediction, send a **POST** request to the `/predict/` endpoint with the following JSON payload:
 
-  ```json
-  {
-    "text": "I love this movie"
+```json
+{
+  "text": "I love this movie"
+}
+```
+
+### Response:
+
+```json
+{
+  "status": "success",
+  "data": {
+    "prediction": "positive",
+    "probability": [0.2, 0.8]
   }
-  ```
+}
+```
 
-- **The API will respond with the predicted class and probability:**
+---
 
-  ```json
-  {
-    "status": "success",
-    "data": {
-      "prediction": "positive",
-      "probability": [0.2, 0.8] 
-    }
-  }
-  ```
+## Contributions
 
-## Contributing
+We welcome contributions! Feel free to create issues or submit pull requests to improve the project.
 
-Contributions are welcome! Feel free to open issues or submit pull requests.
+---
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
